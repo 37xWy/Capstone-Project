@@ -4,7 +4,6 @@ Fitness Management System with Personalized Diet Plans
 # Introduction
 For a complete technical overview, including diagrams, flowcharts, and additional details, please check the Capstone Project Documentation.docx included in this repository.
 
-
 # Features
 ## User Authentication & Account Management
 User sign-up and login functionality
