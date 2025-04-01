@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Healthy Track</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="boxes.css">
+  
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f5f5f7;
+      color: #333;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .about-container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .about-container h1 {
+      font-size: 34px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .about-container p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .section {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      background: #1abc9c;
+      color: white;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #16a085;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      background: #e5e5e5;
+      width: 100%;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .about-container form {
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .about-container form h2 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .about-container form label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: block;
+      font-weight: bold;
+    }
+
+    .about-container form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      min-height: 100px;
+      font-size: 16px;
+    }
+
+    .about-container form .checkbox-group {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .about-container form .checkbox-group label {
+      font-size: 16px;
+      margin-left: 5px;
+    }
+
+    .about-container form input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border: none;
+      background: #28a745;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .about-container form input[type="submit"]:hover {
+      background: #218838;
+    }
+
+    .team {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 50px 20px;
+            background-color: floralwhite;
+            text-align: center;
+            position: relative;
+            gap: 30px;
+    }
+
+    .team h2 {
+            width: 100%;
+            font-size: 16pt;
+            color: slategray;
+    }  
+
+    .team-card {
+        background-color: white;
+        border: 1px solid black;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 10px;
+        width: 250px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .team-card img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    .team-card h3 {
+        font-size: 14pt;
+        color: black;
+        font-weight: bold;
+    }
+
+    .team-card:hover {
+        transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">🏋️ Healthy Track</div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="capstonehomepage.php">Homepage</a></li>
+            <li><a href="addinfo.html">Add Info</a></li>
+            <li><a href="diet_plan.php">Food</a></li>
+            <li><a href="Exercise.html">Exercise</a></li>
+            <li><a href="exercise_suggestion.php">Exercise Suggestion</a></li>
+            <li><a href="about_us.html">About us</a></li>
+        </ul>
+    </nav>
+    <div class="profile-container">
+      <a href="#" id="profile-btn">
+        <img src="Images/6522516.png" alt="Profile">
+      </a>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="accountsettings.html">Account Settings</a>
+        <a href="logout.php">Logout</a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="about-container">
+    <h1>About Healthy Track</h1>
+    <p>Healthy Track is a revolutionary fitness management system designed to help you achieve your health and wellness goals effortlessly. We provide a seamless way to track your fitness progress, manage your meal plans, and get personalized exercise suggestions.</p>
+    
+    <div class="section">
+      <h2>Why Choose Healthy Track?</h2>
+      <p>✔ Personalized fitness tracking</p>
+      <p>✔ Meal planning and calorie monitoring</p>
+      <p>✔ AI-powered exercise suggestions</p>
+      <p>✔ Comprehensive reports for progress analysis</p>
+    </div>
+    
+    <div class="section">
+      <h2>Meet Our Team</h2>
+      <section class="team">
+        <h2>The Project Team (Group 6)</h2>
+        <div class="team-card">
+            <img src="Images/WilliamPic.jpg" alt="Wong Kap Onn Pic">
+            <h3>Wong Kap Onn</h3>
+            <p>TP074292</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/wzhPic.jpg" alt="Wong Zheng Han Pic">
+            <h3>Wong Zheng Han</h3>
+            <p>TP074212</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/nwyPic.jpg" alt="Ng Wei Yang Pic">
+            <h3>Ng Wei Yang</h3>
+            <p>TP074904</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/HannPic.png" alt="Tan Yen Hann Pic">
+            <h3>Tan Yen Hann</h3>
+            <p>TP073629</p>
+        </div>
+        <div class="team-card">
+          <img src="Images/ttctPic.jpg" alt="Timothy Tan Chern Tian Pic">
+          <h3>Timothy Tan Chern Tian</h3>
+          <p>TP074658</p>
+        </div>
+        <div class="team-card">
+          <img src="Images/cgjtPic.jpg" alt="Calvin Giam Jian Tao Pic">
+          <h3>Calvin Giam Jian Tao</h3>
+          <p>TP068321</p>
+        </div>
+        <p>We are a passionate team of fitness enthusiasts, nutritionists, and tech experts dedicated to helping individuals live healthier lives.</p>
+      </section>
+    </div>
+
+    <div class="section">
+      <h2>Get in Touch</h2>
+      <p>Email: <a href="mailto:healthytrack@gmail.com">healthytrack@gmail.com</a></p>
+      <p>Phone: <a href="tel:0196662224">019-6662224</a></p>
+    </div>
+
+    <form method="POST" action="feedback.php">
+      <h2>Submit Your Feedback</h2>
+      <label for="message">Your Feedback:</label>
+      <textarea id="message" name="message" placeholder="Enter your feedback here..." required></textarea>
+      
+      <div class="checkbox-group">
+        <label for="anonymous">
+          <input type="checkbox" id="anonymous" name="anonymous" value="1">
+          Submit as anonymous
+        </label>
+      </div>
+      
+      <input type="submit" value="Submit Feedback">
+    </form>
+    
+    <a href="capstonehomepage.php" class="btn">Go Back</a>
+  </div>
+  
+  <footer class="footer">
+    <p>Healthy Track Fitness Management System © 2025 | Designed for a Healthier You!</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const profileBtn = document.getElementById("profile-btn");
+      const dropdownMenu = document.getElementById("dropdown-menu");
+
+      profileBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        dropdownMenu.classList.toggle("show");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!profileBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.classList.remove("show");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

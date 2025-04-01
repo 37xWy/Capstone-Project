@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style-calvin.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Hello, Welcome!</h1>
+            <p>Don't have an account?</p>
+            <button class="register-btn" onclick="window.location.href='register.html'">REGISTER</button>
+        </div>
+        <div class="form-box">
+            <form id="loginForm">
+                <h1>Login</h1>
+                <div class="input-bot">
+                    <input type="text" name="user_input" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-bot">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <i class='bx bxs-lock'></i>
+                </div>
+                <button type="button" id="togglePassword" class="btn">Show Password</button>
+                <button type="button" id="loginBtn" class="btn">Login</button>
+                <p><a href="forgot_password.html">Forgot Password?</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            let form = document.getElementById("loginForm");    
+            let formData = new FormData(form);
+
+            fetch("Login.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json()) 
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem("user_id", data.user_id);
+                    localStorage.setItem("username", data.username);
+                    window.location.href = data.redirect;  
+                } else {
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            });
+        });
+
+        document.getElementById("togglePassword").addEventListener("click", function() {
+            var passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                this.textContent = "Hide Password";
+            } else {
+                passwordField.type = "password";
+                this.textContent = "Show Password";
+            }
+        });
+    </script>
+</body>
+
+</html>

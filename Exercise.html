@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel ="stylesheet" href="boxes.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        main {
+            flex-grow: 1;
+            max-width: 900px;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        .date-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="date"], input[type="number"] {
+            font-size: 16px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            background: antiquewhite;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: lightgreen;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        .subheader {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+            padding-top: 15px;
+        }
+
+        .spacer {
+            width: 150px;
+        }
+
+        .rowSpacing {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .upColumn {
+            background-color: mediumseagreen;
+        }
+
+        .downColumn {
+            background-color: limegreen;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">🏋️ Healthy Track</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="capstonehomepage.php">Homepage</a></li>
+                    <li><a href="addinfo.html">Add Info</a></li>
+                    <li><a href="diet_plan.php">Food</a></li>
+                    <li><a href="Exercise.html">Exercise</a></li>
+                    <li><a href="exercise_suggestion.php">Exercise Suggestion</a></li>
+                    <li><a href="about_us.html">About us</About></a></li>
+                    </a>
+                </ul>
+            </nav>
+ 
+            <div class="profile-container">
+                <a href="#" id="profile-btn">
+                    <img src="Images/6522516.png" alt="Profile">
+                </a>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a href="accountsettings.html">Account Settings</a> 
+                    <a href="logout.php">Logout</a>
+                </div>
+            </div>
+    </header>
+    
+    <main>
+        <div class="date-container">
+            <label for="dateSelection">Date: </label>
+            <button id="prevDate"><</button>
+            <input type="date" id="dateSelection">
+            <button id="nextDate">></button>
+        </div>
+
+        <table class="rowSpacing">
+            <tr class="upColumn">
+                <td class="subheader">Cardiovascular</td>
+                <td class="spacer"></td>
+                <td>Minutes</td>
+                <td>Calories Burned</td>
+                <td>Action</td>
+                <td></td>
+            </tr>
+
+            <tbody id="exerciseList"></tbody>
+
+            <tr>
+                <td>
+                    <select id="exerciseDropdown">
+                        <option value="">Loading exercises...</option>
+                    </select>
+                    <button id="addExercise">Add Exercise</button>
+                </td>
+            </tr> 
+            <tr class="downColumn">
+                <td></td>
+                <td>Daily Total</td>
+                <td id="totalMinutes">0</td>
+                <td id="totalCalories">0</td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr class="upColumn">
+                <td class="subheader">Strength</td>
+                <td class="spacer"></td>
+                <td>KG</td>
+                <td>Sets</td>
+                <td>Reps</td>
+                <td>Action</td>
+            </tr>
+
+            <tbody id="strengthList"></tbody>
+
+            <tr>
+                <td>
+                    <select id="strengthDropdown">
+                        <option value="">Loading exercises...</option>
+                    </select>
+                    <button id="addStrengthExercise">Add Exercise</button>
+                </td>
+            </tr>
+            <tr class="downColumn">
+                <td></td>
+                <td>Total Volume</td>
+                <td id="totalVolume">0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr> 
+        </table>
+
+        <button id="saveData">Save</button>
+    </main>
+
+    <footer class="footer">
+        Healthy Track Fitness Management System © 2025 | Designed for a Healthier You!
+    </footer>
+ 
+
+    <script>    
+        document.addEventListener("DOMContentLoaded", function () {
+                const profileBtn = document.getElementById("profile-btn");
+                const dropdownMenu = document.getElementById("dropdown-menu");
+    
+                profileBtn.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    dropdownMenu.classList.toggle("show");
+                });
+    
+                document.addEventListener("click", function (event) {
+                    if (!profileBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.remove("show");
+                    }
+                });
+            });
+
+        window.onload = function() {
+            let user_id = localStorage.getItem("user_id");
+            if (!user_id) {
+                alert("Please log in to proceed. Redirecting to login page.")
+                window.location.href = "login.html";
+            }
+
+            let dateSelection = document.getElementById("dateSelection");
+            let today = new Date().toISOString().split('T')[0];
+            dateSelection.value = today;
+
+            function fetchWorkoutsForDate(date) {
+                let user_id = localStorage.getItem("user_id");
+                
+                fetch(`FetchCardioWorkout.php?date=${date}&user_id=${user_id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let exerciseList = document.getElementById("exerciseList");
+                        exerciseList.innerHTML = "";
+
+                        if (!data || data.length === 0) {
+                            return;
+                        }
+
+                        data.forEach(workout => {
+                            let newRow = document.createElement("tr");
+                            newRow.setAttribute("data-preloaded", "true");
+
+                            newRow.innerHTML = `
+                                <td>${workout.E_name}</td>
+                                <td></td>
+                                <td><input type="number" class="minutes" min="0" value="${workout.CW_minutes}"></td>
+                                <td><input type="number" class="calories" min="0" value="${workout.CW_calories}"></td>
+                            `;  
+
+                            newRow.querySelector(".minutes").addEventListener("input", updateTotals);
+                            newRow.querySelector(".calories").addEventListener("input", updateTotals);
+
+                            exerciseList.appendChild(newRow);
+                        });
+
+                        updateTotals();
+                    })  
+                    .catch(error => {
+                        console.error("Error fetching workouts:", error);
+                    });
+            }
+
+            document.getElementById("dateSelection").addEventListener("change", function() {
+                fetchWorkoutsForDate(this.value);
+            });
+
+            fetchWorkoutsForDate(today);
+
+            function fetchStrengthWorkoutsForDate(date) {
+                let user_id = localStorage.getItem("user_id");
+                
+                fetch(`FetchStrengthWorkout.php?date=${date}&user_id=${user_id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let strengthList = document.getElementById("strengthList");
+                        strengthList.innerHTML = "";
+
+                        if (!data || data.length === 0) {
+                            return;
+                        }
+
+                        data.forEach(workout => {
+                            let newRow = document.createElement("tr");
+                            newRow.setAttribute("data-preloaded", "true");
+
+                            newRow.innerHTML = `
+                                <td>${workout.E_name}</td>
+                                <td></td>
+                                <td><input type="number" class="kg" min="0" value="${workout.SW_kg}"></td>
+                                <td><input type="number" class="sets" min="0" value="${workout.SW_sets}"></td>
+                                <td><input type="number" class="reps" min="0" value="${workout.SW_reps}"></td>
+                            `;  
+
+                            newRow.querySelector(".kg").addEventListener("input", updateTotalVolume);
+                            newRow.querySelector(".sets").addEventListener("input", updateTotalVolume);
+                            newRow.querySelector(".reps").addEventListener("input", updateTotalVolume);
+                            strengthList.appendChild(newRow);
+                        });
+                       updateTotalVolume();
+                    })  
+                    .catch(error => {
+                        console.error("Error fetching workouts:", error);
+                    });
+            }
+
+            document.getElementById("dateSelection").addEventListener("change", function() {
+                fetchWorkoutsForDate(this.value);
+                fetchStrengthWorkoutsForDate(this.value);
+            });
+
+            fetchStrengthWorkoutsForDate(today);
+
+            function changeDate (days) {
+                let currentDate = new Date(dateSelection.value);
+                currentDate.setDate(currentDate.getDate() + days);
+                dateSelection.value = currentDate.toISOString().split('T')[0];
+                fetchWorkoutsForDate(dateSelection.value);
+                fetchStrengthWorkoutsForDate(dateSelection.value);
+            }
+
+            document.getElementById("prevDate").onclick = function() { changeDate(-1); };
+            document.getElementById("nextDate").onclick = function() { changeDate(1); };
+
+            fetch("ExerciseDBConn.php")
+                .then(response => response.json())
+                .then(data => {
+                    let dropdown = document.getElementById("exerciseDropdown");
+                    dropdown.innerHTML = '<option value ="">Select an exercise</option>';
+                    
+                    if (data.length === 0) {
+                        dropdown.innerHTML = '<option value="">No exercises found</option>';
+                        return;
+                    }
+
+                    data.forEach(exercise => {
+                        if (exercise.E_category === "Cardiovascular") { 
+                            let option = document.createElement("option");
+                            option.value = exercise.E_id;
+                            option.textContent = exercise.E_name;
+                            dropdown.appendChild(option);
+                        }
+                    });
+
+                    if (dropdown.options.length === 1) {
+                        dropdown.innerHTML = '<option value="">No cardiovascular exercises available</option>';
+                    }
+                })
+
+                .catch(error => {
+                    console.error("Error fetching exercises:", error);
+                    document.getElementById("exerciseDropdown").innerHTML = '<option value="">Error loading exercises</option>';
+                });
+
+            fetch("ExerciseDBConn.php")
+                .then(response => response.json())
+                .then(data => {
+                    let dropdown = document.getElementById("strengthDropdown");
+                    dropdown.innerHTML = '<option value ="">Select an exercise</option>';
+
+                    if (data.length === 0) {
+                        dropdown.innerHTML = '<option value="">No exercises found</option>';
+                        return;
+                    }
+                    data.forEach(exercise => {
+                        if (exercise.E_category === "Strength") {
+                            let option = document.createElement("option");
+                            option.value = exercise.E_id;
+                            option.textContent = exercise.E_name;
+                            dropdown.appendChild(option);
+                        }
+                    });
+
+                    if (dropdown.options.length === 1) {
+                        dropdown.innerHTML = '<option value="">No strength exercises available</option>';
+                    }
+                })
+
+                .catch(error => {
+                    console.error("Error fetching exercises:", error);
+                    document.getElementById("strengthDropdown").innerHTML = '<option value="">Error loading exercises</option>';
+                });
+
+            document.getElementById("addExercise").onclick = function() {
+                let dropdown = document.getElementById("exerciseDropdown");
+                let selectedExerciseId = dropdown.value;
+                let selectedExerciseName = dropdown.selectedOptions[0].text;
+
+                if (!selectedExerciseId) {
+                    alert("Please select exercise provided!")
+                    return;
+                }
+
+                let exerciseList = document.getElementById("exerciseList");
+                let newRow = document.createElement("tr");
+
+                newRow.innerHTML = `
+                    <td>${selectedExerciseName}</td>
+                    <td></td>
+                    <td><input type="number" class="minutes" min="0" value="0"></td>
+                    <td><input type="number" class="calories" min="0" value="0"></td>
+                    <td><button class="delete-btn">X</button></td>
+                `;
+
+                newRow.querySelector(".delete-btn").onclick = function() {
+                    exerciseList.removeChild(newRow);
+                    updateTotals();
+                };
+
+                newRow.querySelector(".minutes").addEventListener("input", updateTotals);
+                newRow.querySelector(".calories").addEventListener("input", updateTotals);
+                exerciseList.appendChild(newRow);
+            };
+
+            function updateTotals() {
+                let totalMinutes = 0;
+                let totalCalories = 0;
+
+                document.querySelectorAll(".minutes").forEach(input => {
+                    totalMinutes += parseInt(input.value) || 0;
+                });
+
+                document.querySelectorAll(".calories").forEach(input => {
+                    totalCalories += parseInt(input.value) || 0;
+                });
+
+                document.getElementById("totalMinutes").textContent = totalMinutes;
+                document.getElementById("totalCalories").textContent = totalCalories;
+            }
+
+            document.getElementById("addStrengthExercise").onclick = function() {
+                let dropdown = document.getElementById("strengthDropdown");
+                let selectedExerciseId = dropdown.value;
+                let selectedExerciseName = dropdown.selectedOptions[0].text;
+
+                if (!selectedExerciseId) {
+                    alert("Please select exercise provided!")
+                    return;
+                }
+
+                let strengthList = document.getElementById("strengthList");
+                let newRow = document.createElement("tr");
+
+                newRow.innerHTML = `
+                    <td>${selectedExerciseName}</td>
+                    <td></td>
+                    <td><input type="number" class="kg" min="0" value="0"></td>
+                    <td><input type="number" class="sets" min="0" value="0"></td>
+                    <td><input type="number" class="reps" min="0" value="0"></td>
+                    <td><button class="delete-btn">X</button></td>
+                `;
+
+                newRow.querySelector(".delete-btn").onclick = function() {
+                    strengthList.removeChild(newRow);
+                    updateTotalVolume();
+                };
+
+                newRow.querySelector(".kg").addEventListener("input", updateTotalVolume);
+                newRow.querySelector(".sets").addEventListener("input", updateTotalVolume);
+                newRow.querySelector(".reps").addEventListener("input", updateTotalVolume);
+                strengthList.appendChild(newRow);
+            };
+
+            function updateTotalVolume() {
+                let totalVolume = 0;
+                document.querySelectorAll("#strengthList tr").forEach(row => {
+                    let kg = parseFloat(row.querySelector(".kg")?.value) || 0;
+                    let sets = parseInt(row.querySelector(".sets")?.value) || 0;
+                    let reps = parseInt(row.querySelector(".reps")?.value) || 0;
+                    totalVolume += kg * sets * reps;
+                });
+                document.getElementById("totalVolume").textContent = totalVolume;
+            }
+
+            document.getElementById("saveData").onclick = function() {
+                let date = document.getElementById("dateSelection").value;
+                let cardioWorkouts = [];
+                let strengthWorkouts = [];
+                
+                document.querySelectorAll("#exerciseList tr").forEach(row => {
+                    if(row.hasAttribute("data-preloaded")) {
+                        return;
+                    }
+
+                    let exerciseName = row.cells[0].textContent;
+                    let minutes = row.querySelector(".minutes").value;
+                    let calories = row.querySelector(".calories").value;
+
+                    if (minutes > 0 && calories > 0){
+                        cardioWorkouts.push({
+                            name: exerciseName,
+                            minutes: minutes,
+                            calories: calories,
+                            date: date
+                        });
+                    }
+                });
+
+                document.querySelectorAll("#strengthList tr").forEach(row => {
+                    if(row.hasAttribute("data-preloaded")) {
+                        return;
+                    }
+
+                    let exerciseName = row.cells[0].textContent;
+                    let kg = row.querySelector(".kg").value;
+                    let sets = row.querySelector(".sets").value;
+                    let reps = row.querySelector(".reps").value;
+
+                    if (kg > 0 && sets > 0 && reps > 0){
+                        strengthWorkouts.push({
+                            name: exerciseName,
+                            kg: kg,
+                            sets: sets,
+                            reps: reps,
+                            date: date
+                        });
+                    }
+                });
+
+                if (cardioWorkouts.length === 0 && strengthWorkouts.length == 0) {
+                    alert("Please add at least one exercise with valid data.");
+                    return;
+                }
+
+                fetch("SaveCardioWorkout.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({cardioWorkouts})
+                })
+                .then (response => response.json())
+                .then (data => {
+                    if (data.success) {
+                        alert("Cardio workout saved successfully!");
+                        location.reload();
+                    } else {
+                        alert("Error saving cardio data: " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error: ", error);
+                    alert("Failed to save data.");
+                });
+
+                fetch("SaveStrengthWorkout.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({strengthWorkouts})
+                })
+                .then (response => response.json())
+                .then (data => {
+                    if (data.success) {
+                        alert("strength workout saved successfully!");
+                        location.reload();
+                    } else {
+                        alert("Error saving strength data: " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error: ", error);
+                    alert("Failed to save data.");
+                });
+            };                                                                                                   
+        };
+    </script>
+</body>
+</html>
