@@ -1,6 +1,10 @@
 # Capstone-Project
 Fitness Management System with Personalized Diet Plans
 
+# Introduction
+For a complete technical overview, including diagrams, flowcharts, and additional details, please check the Capstone Project Documentation.docx included in this repository.
+
+
 # Features
 ## User Authentication & Account Management
 User sign-up and login functionality
@@ -39,5 +43,3 @@ Feedback collection for continuous improvement
 
 # Installation & Setup
 For a detailed installation guide, please refer to Section 11.0: Installation & Setup Guide in the project documentation.
-
-For a complete technical overview, including diagrams, flowcharts, and additional details, please check the Capstone Project Documentation.docx included in this repository.
